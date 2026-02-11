@@ -38,7 +38,7 @@ EOT
     size                       = string
     storage_type               = string
     username                   = string
-    allow_claim                = optional(bool, true)
+    allow_claim                = optional(bool) # Default: true
     disallow_public_ip_address = optional(bool)
     notes                      = optional(string)
     password                   = optional(string)
