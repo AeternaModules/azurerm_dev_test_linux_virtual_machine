@@ -25,7 +25,7 @@ resource "azurerm_dev_test_linux_virtual_machine" "dev_test_linux_virtual_machin
   }
 
   dynamic "inbound_nat_rule" {
-    for_each = each.value.inbound_nat_rule != null ? [each.value.inbound_nat_rule] : []
+    for_each = each.value.inbound_nat_rule != null ? each.value.inbound_nat_rule : []
     content {
       backend_port = inbound_nat_rule.value.backend_port
       protocol     = inbound_nat_rule.value.protocol
