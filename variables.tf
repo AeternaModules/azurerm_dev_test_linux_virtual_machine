@@ -21,6 +21,8 @@ Optional:
     - disallow_public_ip_address
     - notes
     - password
+    - password_key_vault_id (alternative to password - read from Key Vault instead)
+    - password_key_vault_secret_name (alternative to password - read from Key Vault instead)
     - ssh_key
     - tags
     - inbound_nat_rule (block):
@@ -29,21 +31,23 @@ Optional:
 EOT
 
   type = map(object({
-    lab_name                   = string
-    lab_subnet_name            = string
-    lab_virtual_network_id     = string
-    location                   = string
-    name                       = string
-    resource_group_name        = string
-    size                       = string
-    storage_type               = string
-    username                   = string
-    allow_claim                = optional(bool) # Default: true
-    disallow_public_ip_address = optional(bool)
-    notes                      = optional(string)
-    password                   = optional(string)
-    ssh_key                    = optional(string)
-    tags                       = optional(map(string))
+    lab_name                       = string
+    lab_subnet_name                = string
+    lab_virtual_network_id         = string
+    location                       = string
+    name                           = string
+    resource_group_name            = string
+    size                           = string
+    storage_type                   = string
+    username                       = string
+    allow_claim                    = optional(bool) # Default: true
+    disallow_public_ip_address     = optional(bool)
+    notes                          = optional(string)
+    password                       = optional(string)
+    password_key_vault_id          = optional(string)
+    password_key_vault_secret_name = optional(string)
+    ssh_key                        = optional(string)
+    tags                           = optional(map(string))
     gallery_image_reference = object({
       offer     = string
       publisher = string

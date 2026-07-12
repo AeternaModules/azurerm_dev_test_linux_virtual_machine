@@ -1,3 +1,8 @@
+data "azurerm_key_vault_secret" "password" {
+  for_each     = { for k, v in var.dev_test_linux_virtual_machines : k => v if v.password_key_vault_id != null && v.password_key_vault_secret_name != null }
+  name         = each.value.password_key_vault_secret_name
+  key_vault_id = each.value.password_key_vault_id
+}
 resource "azurerm_dev_test_linux_virtual_machine" "dev_test_linux_virtual_machines" {
   for_each = var.dev_test_linux_virtual_machines
 
@@ -13,7 +18,7 @@ resource "azurerm_dev_test_linux_virtual_machine" "dev_test_linux_virtual_machin
   allow_claim                = each.value.allow_claim
   disallow_public_ip_address = each.value.disallow_public_ip_address
   notes                      = each.value.notes
-  password                   = each.value.password
+  password                   = each.value.password != null ? each.value.password : try(data.azurerm_key_vault_secret.password[each.key].value, null)
   ssh_key                    = each.value.ssh_key
   tags                       = each.value.tags
 
