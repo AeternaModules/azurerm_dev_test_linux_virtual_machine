@@ -1,3 +1,7 @@
+output "dev_test_linux_virtual_machines_id" {
+  description = "Map of id values across all dev_test_linux_virtual_machines, keyed the same as var.dev_test_linux_virtual_machines"
+  value       = { for k, v in azurerm_dev_test_linux_virtual_machine.dev_test_linux_virtual_machines : k => v.id }
+}
 output "dev_test_linux_virtual_machines_allow_claim" {
   description = "Map of allow_claim values across all dev_test_linux_virtual_machines, keyed the same as var.dev_test_linux_virtual_machines"
   value       = { for k, v in azurerm_dev_test_linux_virtual_machine.dev_test_linux_virtual_machines : k => v.allow_claim }
