@@ -40,7 +40,7 @@ EOT
     size                           = string
     storage_type                   = string
     username                       = string
-    allow_claim                    = optional(bool) # Default: true
+    allow_claim                    = optional(bool)
     disallow_public_ip_address     = optional(bool)
     notes                          = optional(string)
     password                       = optional(string)
@@ -86,6 +86,10 @@ EOT
   # path: storage_type
   #   condition: contains(["Standard", "Premium"], value)
   #   message:   must be one of: Standard, Premium
+  # path: inbound_nat_rule.protocol
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: inbound_nat_rule.backend_port
+  #   source:    validate.PortNumber: no recognizable `if ... { errors = append(...) }` pattern - read it by hand
   # path: tags
   #   condition: length(value) <= 50
   #   message:   [from tags.Validate: invalid when len(value) > 50]
